@@ -58,16 +58,19 @@ extension FavoriteImagesViewController {
         guard let cell = tableView.cellForRow(at: indexPath) as? FavoriteImageCell else { return }
         let id = cell.favoritePhoto.id
         self.outId = id
-        performSegue(withIdentifier: "Favorite-Detail", sender: nil)
+        let detailPhotoController = DetailPhotoController()
+        detailPhotoController.inputId = outId
+        navigationController?.pushViewController(detailPhotoController, animated: true)
+//        performSegue(withIdentifier: "Favorite-Detail", sender: nil)
         
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Favorite-Detail" {
-            if let dst = segue.destination as? DetailPhotoController {
-                dst.inputId = self.outId
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "Favorite-Detail" {
+//            if let dst = segue.destination as? DetailPhotoController {
+//                dst.inputId = self.outId
+//            }
+//        }
+//    }
     
 }

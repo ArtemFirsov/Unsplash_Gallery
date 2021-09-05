@@ -22,6 +22,7 @@ class ImagesViewController: UICollectionViewController {
     var apiService = ApiService()
     
     override func viewDidLoad() {
+        collectionView.backgroundColor = .white
         super.viewDidLoad()
         setupSearchBar()
         configureCompLayout()
@@ -117,16 +118,19 @@ extension ImagesViewController {
             let id = cell.randomPhotoOut.id
             self.outId = id
         }
-        performSegue(withIdentifier: "Images-Detail", sender: nil)
+        let detailPhotoController = DetailPhotoController()
+        detailPhotoController.inputId = outId
+        navigationController?.pushViewController(detailPhotoController, animated: true)
+//        performSegue(withIdentifier: "Images-Detail", sender: nil)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Images-Detail" {
-            if let dst = segue.destination as? DetailPhotoController {
-                dst.inputId = outId
-            }
-        }
-    }
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "Images-Detail" {
+//            if let dst = segue.destination as? DetailPhotoController {
+//                dst.inputId = outId
+//            }
+//        }
+//    }
 
 }
 

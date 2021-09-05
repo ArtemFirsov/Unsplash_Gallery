@@ -33,3 +33,4 @@ struct Result: Decodable {
         case small
         case thumb
     }
+}

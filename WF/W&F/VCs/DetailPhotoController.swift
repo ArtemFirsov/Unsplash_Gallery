@@ -65,19 +65,38 @@ class DetailPhotoController: UIViewController {
 
     var apiService = ApiService()
     
-    @IBOutlet weak var myCollection: UICollectionView! {
-        didSet {
-            myCollection.delegate = self
-            myCollection.dataSource = self
-            myCollection.register(DetailImageCell.self, forCellWithReuseIdentifier: DetailImageCell.reuseIden)
-            myCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CellIden")
-
-        }
-    }
+//    @IBOutlet weak var myCollection: UICollectionView! {
+//        didSet {
+//            myCollection.delegate = self
+//            myCollection.dataSource = self
+//            myCollection.register(DetailImageCell.self, forCellWithReuseIdentifier: DetailImageCell.reuseIden)
+//            myCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CellIden")
+//
+//        }
+//    }
     
+    lazy var myCollection: UICollectionView = {
+        let myCollection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        myCollection.delegate = self
+        myCollection.dataSource = self
+        myCollection.register(DetailImageCell.self, forCellWithReuseIdentifier: DetailImageCell.reuseIden)
+        myCollection.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "CellIden")
+        myCollection.backgroundColor = .white
+        myCollection.translatesAutoresizingMaskIntoConstraints = false
+        return myCollection
+    }()
+    
+    func setupMyCollection() {
+        self.view.addSubview(myCollection)
+        myCollection.topAnchor.constraint(equalTo: self.view.topAnchor).isActive = true
+        myCollection.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        myCollection.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true
+        myCollection.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupMyCollection()
         setupSaveButton()
         setNavConntroller()
         configureCompLayout()

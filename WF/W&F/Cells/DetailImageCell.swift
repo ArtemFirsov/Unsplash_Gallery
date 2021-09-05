@@ -13,7 +13,7 @@ class DetailImageCell: UICollectionViewCell {
     
     var photoInfo: PhotoInfoModel! {
         didSet {
-            let photoUrl = photoInfo.urls["small"] ?? "nothing"
+            let photoUrl = photoInfo.urls["regular"] ?? "nothing"
             guard let url = URL(string: photoUrl) else { return }
             imageView.sd_setImage(with: url, placeholderImage: UIImage())
             let downloadText = photoInfo.downloads

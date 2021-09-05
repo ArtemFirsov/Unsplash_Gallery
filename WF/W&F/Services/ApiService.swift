@@ -19,8 +19,8 @@ class ApiService {
         let url = baseUrl + method
 //        let header: HTTPHeaders = ["Autorization" : "Client-ID \(token)"]
         let parameters: Parameters = ["query": searchTerm,
-                                      "page": String(1),
-                                      "per_page": String(30),
+                                      "page": String(2),
+                                      "per_page": String(100),
                                       "client_id": token]
         
         AF.request(url, method: .get, parameters: parameters/*, headers: header*/).responseData { response in
@@ -62,7 +62,7 @@ class ApiService {
     func getRandomPhotos(completion: @escaping([RandomPhotoModel]) ->()) {
         let method = "/photos/random/"
         let url = baseUrl + method
-        let parameters: Parameters = ["count": String(30),
+        let parameters: Parameters = ["count": String(50),
                                       "client_id": token]
         
         AF.request(url, method: .get, parameters: parameters).responseData { response in
